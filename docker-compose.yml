@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: taskmanager_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: TaskManagerDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./TaskManager.API
+      dockerfile: Dockerfile
+    container_name: taskmanager_api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      # Host=db — имя контейнера с БД внутри Docker-сети
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TaskManagerDb;Username=postgres;Password=password
+    restart: unless-stopped
+
+volumes:
+  pgdata:

@@ -15,6 +15,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpGet]
+    // НОВОЕ: Принимаем CancellationToken из HTTP-контекста
     public async Task<ActionResult<PagedResult<TaskDto>>> GetAll(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10,
@@ -32,7 +33,7 @@ public class TasksController : ControllerBase
     {
         var task = await _taskService.GetTaskByIdAsync(id, cancellationToken);
         if (task == null) return NotFound("Задача не найдена.");
-
+        
         return Ok(task);
     }
 
