@@ -22,6 +22,7 @@ services:
     depends_on:
       - db
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       # Host=db — имя контейнера с БД внутри Docker-сети
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TaskManagerDb;Username=postgres;Password=password
     restart: unless-stopped
