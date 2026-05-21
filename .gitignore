@@ -1,0 +1,36 @@
+## Папки сборки
+bin/
+obj/
+
+## Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Логи
+*.log
+logs/
+
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+
+## Docker
+docker-compose.override.yml
+
+## Секреты и переменные окружения
+.env
+*.pfx
+*.key
+
+## NuGet
+*.nupkg
+.nuget/
+
+## OS
+.DS_Store
+Thumbs.db
